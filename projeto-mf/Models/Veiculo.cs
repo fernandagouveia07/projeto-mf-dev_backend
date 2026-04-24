@@ -17,11 +17,9 @@ namespace projeto_mf.Models
         public string Placa { get; set; }
 
         [Required(ErrorMessage = "Informe o ano de fabricação")]
-
         public int AnoFabricacao { get; set; }
 
         [Required(ErrorMessage = "Informe o ano do modelo.")]
-
         public int AnoModelo { get; set; }
     }
 }
