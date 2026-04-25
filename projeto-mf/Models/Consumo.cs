@@ -21,7 +21,7 @@ namespace projeto_mf.Models
         [Required(ErrorMessage = "Obrigatório informar a quilometragem")]
         public int Km { get; set; }
 
-        [Display(Name = "Tipo de Combustívelo")]
+        [Display(Name = "Tipo de Combustível")]
         public TipoCombustivel Tipo { get; set; }
 
         [Display(Name = "Veículo")]
