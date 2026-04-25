@@ -25,19 +25,93 @@ namespace projeto_mf.Controllers
 			return View();
 		}
 
+		/*CRIAR*/
 		[HttpPost]
-        public async Task<IActionResult> Create(Veiculo veiculo)
-        {
+		public async Task<IActionResult> Create(Veiculo veiculo)
+		{
 			if (ModelState.IsValid)
 			{
 				_context.Veiculos.Add(veiculo);
 				await _context.SaveChangesAsync();
-				return RedirectToAction("Index"); 
+				return RedirectToAction("Index");
 			}
 
-            return View();
-        }
+			return View();
+		}
 
+		/*EDITAR*/
+		public async Task<IActionResult> Edit(int? id)
+		{
+			if (id == null)
+				return NotFound();
+
+			var dados = await _context.Veiculos.FindAsync(id);
+
+			if (dados == null)
+				return NotFound();
+
+			return View(dados);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, Veiculo veiculo)
+		{
+			if (id != veiculo.Id)
+				return NotFound();
+
+			if (ModelState.IsValid)
+			{
+				_context.Update(veiculo);
+				await _context.SaveChangesAsync();
+				return RedirectToAction("Index");
+			}
+
+			return View();
+		}
+
+		/*DETALHES*/
+		public async Task<IActionResult> Details(int? id)
+		{
+			if (id == null)
+				return NotFound();
+
+			var dados = await _context.Veiculos.FindAsync(id);
+
+			if (dados == null)
+				return NotFound();
+
+			return View(dados);
+		}
+
+		/*EXCLUIR*/
+		public async Task<IActionResult> Delete(int? id)
+		{
+			if (id == null)
+				return NotFound();
+
+			var dados = await _context.Veiculos.FindAsync(id);
+
+			if (dados == null)
+				return NotFound();
+
+			return View(dados);
+		}
+
+		[HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfrimed(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var dados = await _context.Veiculos.FindAsync(id);
+
+            if (dados == null)
+                return NotFound();
+			_context.Veiculos.Remove(dados);
+			await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
     }
 }
 
