@@ -23,6 +23,8 @@ namespace projeto_mf.Models
         [Required(ErrorMessage = "Informe o ano do modelo")]
         [Display(Name = "Ano do Modelo")]
         public int AnoModelo { get; set; }
+
+        public ICollection<Consumo> Consumo { get; set; }
     }
 }
 
